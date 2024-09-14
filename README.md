@@ -1,2 +1,2 @@
 # pyweek38
-hello world!
+hello!
