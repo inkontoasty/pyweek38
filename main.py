@@ -1,35 +1,30 @@
-import pygame
-from pygame.locals import *
-from os.path import join as pathjoin
-import time
+from constants import *
+from opening import IntroScene
+from mixer import Mixer
 
-SCENE_INTRO = 0
-
-class IntroScene:
+class GameScene:
     def __init__(self, app):
         self.app = app
-        self.img = pygame.image.load(pathjoin('assets','opening.png'))
-        self.rect = self.img.get_rect()
-        self.now = time.time()
+
+    def reset(self, selected):
+        self.selected = selected
 
     def event(self, event):
         pass
 
     def update(self):
-        if time.time()-self.now > 1/60:
-            self.rect.y += 1
-            self.now = time.time()
-
+        pass
 
     def draw(self):
-        self.app.screen.blit(self.img, (0,0), self.rect)
+        self.app.screen.fill(COL_BG)
 
 class App:
     def __init__(self):
-        pygame.mixer.init()
         pygame.init()
+        self.mixer = Mixer()
+        self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((1280, 720))
-        self.scenes = [IntroScene(self)]
+        self.scenes = [IntroScene(self), GameScene(self)]
         self.scene = SCENE_INTRO
 
     def run(self):
@@ -41,6 +36,7 @@ class App:
             self.scenes[self.scene].update()
             self.scenes[self.scene].draw()
             pygame.display.flip()
+            self.clock.tick(60)
 
 app = App()
 app.run()
