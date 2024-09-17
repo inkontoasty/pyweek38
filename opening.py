@@ -5,8 +5,8 @@ class IntroScene:
         self.app = app
         self.img = pygame.image.load(pathjoin('assets','opening.png')).convert(24)
         self.rect = self.img.get_rect()
-        self.introdone = False
-        self.imgalpha = 256
+        self.introdone = False  # finished scrolling text
+        self.imgalpha = 256  # slowly fade and turn blue
         self.txttitle = getfont(72).render("hearts of betrayal",True,COL_TITLE)
         self.txtchoice = getfont(48).render("choose your country",True,COL_CHOICE)
         self.finlandrect = IMG_FINLAND.get_rect()
@@ -29,13 +29,13 @@ class IntroScene:
         elif self.imgalpha == 0:
             if event.type == MOUSEMOTION: #country selection
                 if self.finlandrect.collidepoint(event.pos):
-                    self.selected = 'Finland'
+                    self.selected = 'finland'
                     self.selrect = self.finlandrect
                 elif self.bulgariarect.collidepoint(event.pos):
-                    self.selected = 'Bulgaria'
+                    self.selected = 'bulgaria'
                     self.selrect = self.bulgariarect
                 elif self.italyrect.collidepoint(event.pos):
-                    self.selected = 'Italy'
+                    self.selected = 'italy'
                     self.selrect = self.italyrect
                 else:
                     self.selected = ''
