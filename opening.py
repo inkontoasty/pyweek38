@@ -20,7 +20,7 @@ class IntroScene:
         self.titlerect.center = (640, 100) 
         self.choicerect.center = (640, 250) 
         self.selrect = self.finlandrect 
-        self.selected = 0
+        self.selected = ''
 
     def event(self, event):
         if event.type == KEYDOWN:
@@ -29,16 +29,16 @@ class IntroScene:
         elif self.imgalpha == 0:
             if event.type == MOUSEMOTION: #country selection
                 if self.finlandrect.collidepoint(event.pos):
-                    self.selected = FINLAND
+                    self.selected = 'Finland'
                     self.selrect = self.finlandrect
                 elif self.bulgariarect.collidepoint(event.pos):
-                    self.selected = BULGARIA
+                    self.selected = 'Bulgaria'
                     self.selrect = self.bulgariarect
                 elif self.italyrect.collidepoint(event.pos):
-                    self.selected = ITALY
+                    self.selected = 'Italy'
                     self.selrect = self.italyrect
                 else:
-                    self.selected = 0
+                    self.selected = ''
             elif event.type == MOUSEBUTTONDOWN:
                 if event.button == 1 and self.selected:
                     self.app.scene = SCENE_GAME
