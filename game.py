@@ -68,6 +68,49 @@ class GameScene:  # to be refactored
         elif event.type == MOUSEWHEEL:
             self.countries[self.selected].mindex = max(0,min(100,self.countries[self.selected].mindex+event.y))
             self.updatetopbar()
+    
+    
+    def attack(self):
+        if self.hovering and self.hovering != self.selected :
+            player_country=self.countries[self.selected]
+            attackrd_country=self.countries[self.hovering]
+
+            if player_country.troops>attackrd_country.troops:
+
+                player_country.troops+=attackrd_country.troops//3
+                player_country.money+=attackrd_country.money
+
+                attackrd_country.owner=self.selected
+
+                player_country.takenover.append(self.hovering)
+
+                attackrd_country.troops = 0
+                attackrd_country.money = 0
+                attackrd_country.mindex = 0
+
+                attackrd_country.allies.clear()
+                attackrd_country.war.clear()
+
+                
+
+                self.updatetopbar()
+            
+            else:
+                lost_troops = attackrd_country.troops // 2  
+                player_country.troops -= lost_troops
+                player_country.troops = max(player_country.troops, 0)
+        
+
+
+
+            
+
+
+
+
+            
+            
+
 
 
     def update(self):

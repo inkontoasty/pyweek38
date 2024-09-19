@@ -22,7 +22,8 @@ class Country:
         self.mindex = mindex
         self.allies = []
         self.war = []
-        self.takenover = None
+        self.takenover = []
+        self.owner = None
 MUSIC1 = 0
 getfont = lambda x: pygame.font.Font(pathjoin('assets','bebasnue.ttf'),x)
 
