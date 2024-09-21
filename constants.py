@@ -14,6 +14,7 @@ COL_TXT2 = (0, 119, 84)
 COL_CHOICE = (255,255,255)
 COL_SELBORDER = (0, 255, 255)
 COUNTRIES = ['finland', 'germany', 'italy', 'serbia', 'bulgaria', 'romania', 'ukraine', 'belarus', 'lithuania', 'latvia', 'estonia', 'uzbekistan', 'krygyzstan', 'georgia', 'azerbaijian', 'turkmenistan', 'tajikstan', 'russia', 'kazakthstan']
+NATIONS = ['finland', 'germany', 'italy', 'serbia', 'bulgaria', 'romania', 'ukraine', 'belarus', 'lithuania', 'latvia', 'estonia', 'uzbekistan', 'krygyzstan', 'georgia', 'azerbaijian', 'turkmenistan', 'tajikstan', 'russia', 'kazakthstan']
 COUNTRYCOLS = [(1, 7, 11), (0, 0, 0), (3, 10, 2), (6, 12, 10), (15, 15, 3), (10, 12, 14), (9, 4, 10), (11, 11, 13), (15, 8, 11), (15, 9, 9), (15, 12, 14), (13, 6, 4), (12, 5, 3), (14, 8, 7), (10, 5, 2), (9, 3, 6), (15, 6, 4), (12, 3, 3), (11, 1, 2)]
 class Country:
     def __init__(self,money,troops,mindex):
@@ -26,4 +27,10 @@ class Country:
         self.owner = None
 MUSIC1 = 0
 getfont = lambda x: pygame.font.Font(pathjoin('assets','bebasnue.ttf'),x)
+
+
+pygame.init()
+#custom event to repeat the country_attack function 
+cooldown_time=pygame.event.custom_type()
+pygame.time.set_timer(cooldown_time,60000)
 

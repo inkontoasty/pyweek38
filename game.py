@@ -1,4 +1,5 @@
-from random import randint
+from random import randint , randrange 
+import random
 from time import time
 from constants import *
 
@@ -23,8 +24,13 @@ class GameScene:  # to be refactored
             }
         self.globaleconomy = 20  # money all countries earn every tick
 
+        
+
+
     def reset(self, selected):  # runs after opening screen
         self.selected = selected  # our chosen country
+
+        NATIONS.pop(NATIONS.index(self.selected))
         self.hovering = None
         self.updatetopbar()
 
@@ -71,14 +77,15 @@ class GameScene:  # to be refactored
     
     
     def attack(self):
+
         if self.hovering and self.hovering != self.selected :
             player_country=self.countries[self.selected]
             attackrd_country=self.countries[self.hovering]
 
             if player_country.troops>attackrd_country.troops:
 
-                player_country.troops+=attackrd_country.troops//3
-                player_country.money+=attackrd_country.money
+                player_country.troops=player_country.troops-attackrd_country.troops+(attackrd_country.troops)//3
+                player_country.money+=attackrd_country.money//3
 
                 attackrd_country.owner=self.selected
 
@@ -101,15 +108,67 @@ class GameScene:  # to be refactored
                 player_country.troops = max(player_country.troops, 0)
         
 
+    
 
+    def country_attack(self):
 
+        
+        
+
+        
+    #created a new list identical to COUNTRIES to use here 
+
+        random_cont1=NATIONS[randrange(0,11)]
+        random_cont2=COUNTRIES[randrange(0,12)]
+
+        
+
+        attacking_country=self.countries[random_cont1]
+        
+
+        defending_country=self.countries[random_cont2]
+        
+
+        if attacking_country!=defending_country:
+            
+
+            if attacking_country.troops>defending_country.troops:
+                
+
+                if random.random()<=0.469:
+                    
+                    
+                    #attack a neighbouring country if probability is correct 
+
+                    attacking_country.troops=attacking_country.troops-defending_country.troops+(defending_country.troops)//3
+                    attacking_country.money+=defending_country.money//3
+
+                    defending_country.owner=attacking_country
+
+                    attacking_country.takenover.append(defending_country)
+
+                    defending_country.troops = 0
+                    defending_country.money = 0
+                    defending_country.mindex = 0
+
+                    defending_country.allies.clear()
+                    defending_country.war.clear()
+
+                    self.updatetopbar()
+
+                    #rest of the function is same as the attack function , needs a bit more optimization
+                    
             
 
 
 
+   
+    
 
-            
-            
+
+
+
+
 
 
 

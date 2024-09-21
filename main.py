@@ -5,7 +5,6 @@ from game import GameScene
 
 
 
-
 class App:
     def __init__(self):
         pygame.init()
@@ -15,6 +14,8 @@ class App:
         self.scenes = [IntroScene(self), GameScene(self)]
         # self.map=CountryMap
         self.scene = SCENE_INTRO
+        
+
 
 
     def run(self):
@@ -23,6 +24,12 @@ class App:
                 if event.type == QUIT:
                     return
                 self.scenes[self.scene].event(event)
+
+                if self.scene:
+                    if event.type==cooldown_time:
+                        
+                        self.scenes[self.scene].country_attack()
+
             
             self.scenes[self.scene].update()
             self.scenes[self.scene].draw()
@@ -34,9 +41,10 @@ class App:
             
             
             
+            
+            
             pygame.display.flip()
             self.clock.tick(60)
-
             
 
 app = App()
